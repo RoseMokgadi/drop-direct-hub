@@ -32,6 +32,7 @@ export const Route = createFileRoute("/auth")({
 
 type Slide = {
   image: string;
+  video?: string;
   category: string;
   title: string;
   subtitle: string;
