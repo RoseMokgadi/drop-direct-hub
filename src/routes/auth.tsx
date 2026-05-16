@@ -7,6 +7,9 @@ import beauty from "@/assets/product-beauty.jpg";
 import home from "@/assets/product-home.jpg";
 import fitness from "@/assets/product-fitness.jpg";
 import fashion from "@/assets/product-fashion.jpg";
+import electronicsVideo from "@/assets/product-electronics.mp4.asset.json";
+import beautyVideo from "@/assets/product-beauty.mp4.asset.json";
+import fashionVideo from "@/assets/product-fashion.mp4.asset.json";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -29,6 +32,7 @@ export const Route = createFileRoute("/auth")({
 
 type Slide = {
   image: string;
+  video?: string;
   category: string;
   title: string;
   subtitle: string;
@@ -40,6 +44,7 @@ type Slide = {
 const slides: Slide[] = [
   {
     image: electronics,
+    video: electronicsVideo.url,
     category: "Electronics",
     title: "WIRELESS PRO",
     subtitle: "Trending earbuds with 4.2x ROAS on TikTok shop creatives",
@@ -49,6 +54,7 @@ const slides: Slide[] = [
   },
   {
     image: beauty,
+    video: beautyVideo.url,
     category: "Beauty & Skincare",
     title: "GLOW SERUM",
     subtitle: "Best-selling skincare with UGC-ready before & after demos",
@@ -76,6 +82,7 @@ const slides: Slide[] = [
   },
   {
     image: fashion,
+    video: fashionVideo.url,
     category: "Fashion & Accessories",
     title: "VELOUR WATCH",
     subtitle: "Luxury-feel timepiece, perfect for Instagram reel angles",
@@ -176,14 +183,26 @@ function AuthPage() {
             style={{ opacity: i === index ? 1 : 0 }}
             aria-hidden={i !== index}
           >
-            <img
-              src={s.image}
-              alt={s.title}
-              width={1280}
-              height={1280}
-              loading={i === 0 ? "eager" : "lazy"}
-              className="h-full w-full object-cover"
-            />
+            {s.video ? (
+              <video
+                src={s.video}
+                poster={s.image}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <img
+                src={s.image}
+                alt={s.title}
+                width={1280}
+                height={1280}
+                loading={i === 0 ? "eager" : "lazy"}
+                className="h-full w-full object-cover"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
           </div>
         ))}
