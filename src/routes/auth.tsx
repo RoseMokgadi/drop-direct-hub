@@ -44,6 +44,7 @@ type Slide = {
 const slides: Slide[] = [
   {
     image: electronics,
+    video: electronicsVideo.url,
     category: "Electronics",
     title: "WIRELESS PRO",
     subtitle: "Trending earbuds with 4.2x ROAS on TikTok shop creatives",
@@ -53,6 +54,7 @@ const slides: Slide[] = [
   },
   {
     image: beauty,
+    video: beautyVideo.url,
     category: "Beauty & Skincare",
     title: "GLOW SERUM",
     subtitle: "Best-selling skincare with UGC-ready before & after demos",
