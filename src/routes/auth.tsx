@@ -82,6 +82,7 @@ const slides: Slide[] = [
   },
   {
     image: fashion,
+    video: fashionVideo.url,
     category: "Fashion & Accessories",
     title: "VELOUR WATCH",
     subtitle: "Luxury-feel timepiece, perfect for Instagram reel angles",
