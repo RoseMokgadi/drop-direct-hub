@@ -183,14 +183,26 @@ function AuthPage() {
             style={{ opacity: i === index ? 1 : 0 }}
             aria-hidden={i !== index}
           >
-            <img
-              src={s.image}
-              alt={s.title}
-              width={1280}
-              height={1280}
-              loading={i === 0 ? "eager" : "lazy"}
-              className="h-full w-full object-cover"
-            />
+            {s.video ? (
+              <video
+                src={s.video}
+                poster={s.image}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <img
+                src={s.image}
+                alt={s.title}
+                width={1280}
+                height={1280}
+                loading={i === 0 ? "eager" : "lazy"}
+                className="h-full w-full object-cover"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
           </div>
         ))}
