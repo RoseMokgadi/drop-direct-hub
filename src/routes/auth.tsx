@@ -7,6 +7,9 @@ import beauty from "@/assets/product-beauty.jpg";
 import home from "@/assets/product-home.jpg";
 import fitness from "@/assets/product-fitness.jpg";
 import fashion from "@/assets/product-fashion.jpg";
+import electronicsVideo from "@/assets/product-electronics.mp4.asset.json";
+import beautyVideo from "@/assets/product-beauty.mp4.asset.json";
+import fashionVideo from "@/assets/product-fashion.mp4.asset.json";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
