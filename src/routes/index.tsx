@@ -4,34 +4,33 @@ import {
   Boxes,
   Store,
   Truck,
-  Wallet,
-  Zap,
   ShieldCheck,
-  PackageSearch,
   LineChart,
-  CheckCircle2,
+  Upload,
+  Users,
+  PackageCheck,
 } from "lucide-react";
 
-import electronics from "@/assets/product-electronics.jpg";
-import beauty from "@/assets/product-beauty.jpg";
-import home from "@/assets/product-home.jpg";
-import fitness from "@/assets/product-fitness.jpg";
-import fashion from "@/assets/product-fashion.jpg";
+import storefrontLaptop from "@/assets/supplier-storefront-laptop.jpg";
+import mobileShop from "@/assets/supplier-mobile-shop.jpg";
+import warehouse from "@/assets/supplier-warehouse.jpg";
+import unboxing from "@/assets/supplier-customer-unboxing.jpg";
+import resellerDesk from "@/assets/supplier-reseller-desk.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Drop Direct — South Africa's reseller supplier network" },
+      { title: "Drop Direct — Distribute your products through SA's reseller network" },
       {
         name: "description",
         content:
-          "Drop Direct connects South African resellers to verified suppliers. Source winning products, sync inventory, and fulfill orders — no stock required.",
+          "Drop Direct connects South African suppliers to a network of resellers running LunexWeb stores. List once, sell everywhere — we handle the orders.",
       },
-      { property: "og:title", content: "Drop Direct — Reseller supplier network" },
+      { property: "og:title", content: "Drop Direct — Supplier distribution network" },
       {
         property: "og:description",
         content:
-          "Source verified suppliers, sync products to your store, and fulfill without holding inventory.",
+          "Put your catalog in front of hundreds of online stores. List once, sell everywhere.",
       },
     ],
   }),
@@ -44,12 +43,10 @@ function Landing() {
       <Header />
       <Hero />
       <LogoStrip />
+      <Showcase />
       <HowItWorks />
-      <Products />
-      <ForResellers />
       <ForSuppliers />
       <LunexBridge />
-      <Pricing />
       <FAQ />
       <CTA />
       <Footer />
@@ -77,9 +74,9 @@ function Header() {
         <Logo />
         <nav className="hidden items-center gap-8 text-sm text-foreground/70 md:flex">
           <a href="#how" className="hover:text-foreground">How it works</a>
-          <a href="#resellers" className="hover:text-foreground">For resellers</a>
+          <a href="#network" className="hover:text-foreground">Where you'll sell</a>
           <a href="#suppliers" className="hover:text-foreground">For suppliers</a>
-          <a href="#pricing" className="hover:text-foreground">Pricing</a>
+          <a href="#partner" className="hover:text-foreground">LunexWeb partner</a>
         </nav>
         <div className="flex items-center gap-2">
           <Link
@@ -92,7 +89,7 @@ function Header() {
             to="/auth"
             className="inline-flex items-center gap-1.5 rounded-lg bg-brand-yellow px-4 py-2 text-sm font-semibold text-background transition-opacity hover:opacity-90"
           >
-            Get started
+            Apply as supplier
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -112,35 +109,35 @@ function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-surface-elevated px-3 py-1 text-xs font-medium text-foreground/70">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-yellow" />
-            Built for South African resellers
+            For South African suppliers · Partnered with LunexWeb
           </span>
           <h1 className="mt-6 text-balance text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl">
-            Sell products you
+            Your products,
             <br />
-            <span className="text-brand-yellow">don't have to stock.</span>
+            <span className="text-brand-yellow">sold in hundreds of stores.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-balance text-lg text-foreground/65">
-            Drop Direct connects resellers to verified South African suppliers. Import
-            winning products to your store, take orders, and let suppliers fulfill —
-            you keep the margin.
+            Drop Direct is the distribution layer that puts your catalog in front of
+            resellers running LunexWeb online stores. You handle stock and shipping —
+            they handle marketing and customers.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               to="/auth"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-yellow px-6 text-sm font-semibold text-background transition-opacity hover:opacity-90"
             >
-              Start sourcing free
+              Apply as a supplier
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              to="/auth"
+            <a
+              href="#how"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-surface-elevated px-6 text-sm font-semibold text-foreground ring-1 ring-white/10 transition-colors hover:bg-surface-input"
             >
-              I'm a supplier
-            </Link>
+              See how it works
+            </a>
           </div>
           <p className="mt-4 text-xs text-foreground/40">
-            Free to browse · No card required · Pay per order
+            Free to list · You set the wholesale price · Get paid on every order
           </p>
         </div>
 
@@ -151,34 +148,41 @@ function Hero() {
 }
 
 function HeroVisual() {
-  const items = [
-    { img: electronics, label: "Wireless Pro", margin: "62%" },
-    { img: beauty, label: "Glow Serum", margin: "71%" },
-    { img: home, label: "Aura Diffuser", margin: "58%" },
-    { img: fashion, label: "Velour Watch", margin: "66%" },
-  ];
   return (
     <div className="mx-auto mt-16 max-w-5xl">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {items.map((it, i) => (
-          <div
-            key={it.label}
-            className="group relative overflow-hidden rounded-2xl bg-surface-elevated ring-1 ring-white/10"
-            style={{ transform: `translateY(${i % 2 ? 16 : 0}px)` }}
-          >
-            <img
-              src={it.img}
-              alt={it.label}
-              className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/90 to-transparent p-3">
-              <span className="text-xs font-semibold">{it.label}</span>
-              <span className="rounded-md bg-brand-yellow/20 px-2 py-0.5 text-[10px] font-bold text-brand-yellow">
-                {it.margin}
-              </span>
-            </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="relative overflow-hidden rounded-3xl bg-surface-elevated ring-1 ring-white/10">
+          <img
+            src={storefrontLaptop}
+            alt="A reseller's online store displaying curated products"
+            className="h-72 w-full object-cover sm:h-80"
+            loading="eager"
+            width={1024}
+            height={1024}
+          />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-yellow">
+              Reseller storefront
+            </p>
+            <p className="mt-1 text-sm font-semibold">Your products listed here</p>
           </div>
-        ))}
+        </div>
+        <div className="relative overflow-hidden rounded-3xl bg-surface-elevated ring-1 ring-white/10 sm:translate-y-6">
+          <img
+            src={mobileShop}
+            alt="Customer shopping on a mobile store"
+            className="h-72 w-full object-cover sm:h-80"
+            loading="lazy"
+            width={1024}
+            height={1024}
+          />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-yellow">
+              Mobile checkout
+            </p>
+            <p className="mt-1 text-sm font-semibold">Customers buy from any device</p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -186,10 +190,10 @@ function HeroVisual() {
 
 function LogoStrip() {
   const stats = [
-    { k: "1,200+", v: "Verified suppliers" },
-    { k: "45K", v: "SKUs available" },
-    { k: "R18M+", v: "Reseller GMV" },
-    { k: "48hr", v: "Avg. fulfillment" },
+    { k: "300+", v: "Active reseller stores" },
+    { k: "R18M+", v: "GMV processed" },
+    { k: "48hr", v: "Avg. order turnaround" },
+    { k: "0%", v: "Listing fees" },
   ];
   return (
     <section className="border-b border-white/5 bg-surface-elevated/30">
@@ -205,27 +209,93 @@ function LogoStrip() {
   );
 }
 
+function Showcase() {
+  const cards = [
+    {
+      img: storefrontLaptop,
+      title: "Boutique lifestyle stores",
+      sub: "Curated catalogs run by independent SA resellers",
+    },
+    {
+      img: mobileShop,
+      title: "Mobile-first shops",
+      sub: "Most orders come from phones — checkout is one tap",
+    },
+    {
+      img: resellerDesk,
+      title: "Power resellers",
+      sub: "Operators pushing volume across multiple categories",
+    },
+    {
+      img: unboxing,
+      title: "Real customers, real homes",
+      sub: "Your packaging arriving at doors across the country",
+    },
+  ];
+  return (
+    <section id="network" className="border-b border-white/5 py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+            Where your products will be sold
+          </p>
+          <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+            Every kind of store on the network.
+          </h2>
+          <p className="mt-5 text-lg text-foreground/65">
+            Once you list with Drop Direct, your SKUs become available to every reseller
+            on the platform — from boutique lifestyle shops to high-volume operators.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {cards.map((c) => (
+            <article
+              key={c.title}
+              className="group overflow-hidden rounded-2xl bg-surface-elevated ring-1 ring-white/5 transition-colors hover:ring-white/15"
+            >
+              <div className="aspect-[4/5] overflow-hidden">
+                <img
+                  src={c.img}
+                  alt={c.title}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  width={1024}
+                  height={1280}
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-semibold">{c.title}</h3>
+                <p className="mt-1.5 text-sm text-foreground/60">{c.sub}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorks() {
   const steps = [
     {
-      icon: PackageSearch,
-      title: "Browse the catalog",
-      desc: "Search 45,000+ products from verified SA suppliers. Filter by margin, category, and shipping time.",
+      icon: Upload,
+      title: "Upload your catalog",
+      desc: "Bulk upload SKUs with images, descriptions, wholesale price and stock count.",
     },
     {
-      icon: Store,
-      title: "Push to your store",
-      desc: "One-click import to your LunexWeb store, Shopify, or any platform via our sync layer.",
+      icon: Users,
+      title: "Resellers import",
+      desc: "Reseller stores on the LunexWeb network pull your products into their storefronts.",
+    },
+    {
+      icon: PackageCheck,
+      title: "We route the order",
+      desc: "When a customer buys, the order lands in your dashboard with shipping label ready.",
     },
     {
       icon: Truck,
-      title: "Supplier ships it",
-      desc: "When a customer orders, the supplier fulfills directly. You never touch inventory.",
-    },
-    {
-      icon: Wallet,
-      title: "Keep your margin",
-      desc: "Drop Direct routes payouts automatically. Suppliers get paid, you keep the rest.",
+      title: "You ship, get paid",
+      desc: "You fulfill from your warehouse. Drop Direct settles your wholesale payout automatically.",
     },
   ];
   return (
@@ -236,7 +306,7 @@ function HowItWorks() {
             How it works
           </p>
           <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            From product to payout in four steps.
+            From catalog to payout in four steps.
           </h2>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/5 sm:grid-cols-2 lg:grid-cols-4">
@@ -258,90 +328,61 @@ function HowItWorks() {
   );
 }
 
-function Products() {
-  const cards = [
-    { img: electronics, cat: "Electronics", title: "Wireless Pro Earbuds", margin: "62%", orders: "12.4K/wk" },
-    { img: beauty, cat: "Beauty", title: "Glow Vitamin C Serum", margin: "71%", orders: "8.9K/wk" },
-    { img: fitness, cat: "Fitness", title: "Power Flex Home Kit", margin: "54%", orders: "4.7K/wk" },
-    { img: home, cat: "Home", title: "Aura Aroma Diffuser", margin: "58%", orders: "6.2K/wk" },
-    { img: fashion, cat: "Fashion", title: "Velour Classic Watch", margin: "66%", orders: "9.1K/wk" },
-  ];
-  return (
-    <section className="border-b border-white/5 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
-              Trending now
-            </p>
-            <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-              Winning products this week.
-            </h2>
-          </div>
-          <Link
-            to="/auth"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-yellow hover:underline"
-          >
-            See full catalog
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-          {cards.map((c) => (
-            <article
-              key={c.title}
-              className="group overflow-hidden rounded-2xl bg-surface-elevated ring-1 ring-white/5 transition-colors hover:ring-white/15"
-            >
-              <div className="aspect-square overflow-hidden">
-                <img
-                  src={c.img}
-                  alt={c.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-4">
-                <p className="text-xs font-medium uppercase tracking-wider text-foreground/50">
-                  {c.cat}
-                </p>
-                <h3 className="mt-1 line-clamp-1 text-sm font-semibold">{c.title}</h3>
-                <div className="mt-3 flex items-center justify-between text-xs">
-                  <span className="rounded-md bg-brand-yellow/15 px-2 py-1 font-bold text-brand-yellow">
-                    {c.margin}
-                  </span>
-                  <span className="text-foreground/50">{c.orders}</span>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ForResellers() {
+function ForSuppliers() {
   const features = [
-    { icon: Zap, title: "One-click product import", desc: "Push any product to your store with images, copy, and pricing pre-built." },
-    { icon: LineChart, title: "Real margin data", desc: "See COGS, recommended retail, and weekly order volume before you import." },
-    { icon: Truck, title: "Order routing", desc: "Orders auto-route to suppliers. Tracking syncs back to your store." },
+    {
+      icon: Boxes,
+      title: "List once, sell everywhere",
+      desc: "Your catalog gets distributed across every reseller store on the network — no extra work per shop.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Verified payouts",
+      desc: "Drop Direct holds customer funds and settles your wholesale share automatically on each fulfilled order.",
+    },
+    {
+      icon: LineChart,
+      title: "Demand insights",
+      desc: "See which SKUs are trending, which stores drive your sales, and where to push more stock.",
+    },
+    {
+      icon: Store,
+      title: "You stay in control",
+      desc: "Set wholesale prices, MOQs, and shipping zones. Pause or update any SKU at any time.",
+    },
   ];
   return (
-    <section id="resellers" className="border-b border-white/5 py-24">
+    <section id="suppliers" className="border-b border-white/5 bg-surface-elevated/20 py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
+        <div className="relative">
+          <div className="overflow-hidden rounded-3xl ring-1 ring-white/10">
+            <img
+              src={warehouse}
+              alt="Supplier warehouse with packed boxes ready to ship"
+              className="h-full w-full object-cover"
+              loading="lazy"
+              width={1024}
+              height={1024}
+            />
+          </div>
+          <div className="absolute -bottom-6 -right-6 hidden w-64 rounded-2xl bg-surface-elevated p-4 ring-1 ring-white/10 backdrop-blur-md sm:block">
+            <p className="text-xs text-foreground/60">Orders this week</p>
+            <p className="mt-1 text-2xl font-bold">2,418</p>
+            <p className="mt-1 text-xs text-brand-yellow">across 184 reseller stores</p>
+          </div>
+        </div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
-            For resellers
+            For suppliers
           </p>
           <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            Run a store without
-            <br />
-            owning a warehouse.
+            Distribute through hundreds of stores — without managing them.
           </h2>
           <p className="mt-5 max-w-xl text-lg text-foreground/65">
-            Skip the inventory, packing, and shipping. Focus on marketing and
-            customer service while suppliers handle fulfillment.
+            Upload your products once. Drop Direct does the rest: matching, syncing,
+            routing orders, and settling payouts. You focus on stock and shipping.
           </p>
-          <ul className="mt-8 space-y-5">
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
             {features.map((f) => (
               <li key={f.title} className="flex gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-yellow/10 text-brand-yellow">
@@ -358,67 +399,6 @@ function ForResellers() {
             to="/auth"
             className="mt-10 inline-flex h-12 items-center gap-2 rounded-xl bg-brand-yellow px-6 text-sm font-semibold text-background transition-opacity hover:opacity-90"
           >
-            Start as a reseller
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="relative">
-          <div className="overflow-hidden rounded-3xl ring-1 ring-white/10">
-            <img src={beauty} alt="Reseller storefront" className="h-full w-full object-cover" />
-          </div>
-          <div className="absolute -bottom-6 -left-6 hidden w-64 rounded-2xl bg-surface-elevated p-4 ring-1 ring-white/10 backdrop-blur-md sm:block">
-            <p className="text-xs text-foreground/60">This month</p>
-            <p className="mt-1 text-2xl font-bold">R 142,300</p>
-            <p className="mt-1 text-xs text-brand-yellow">+38% vs last month</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ForSuppliers() {
-  const features = [
-    { icon: Boxes, title: "List once, sell everywhere", desc: "Your products get distributed across every reseller store on the network." },
-    { icon: ShieldCheck, title: "Verified buyer protection", desc: "Drop Direct holds funds until orders ship — you get paid, on time, every time." },
-    { icon: LineChart, title: "Demand insights", desc: "See which SKUs are trending and which resellers are driving your sales." },
-  ];
-  return (
-    <section id="suppliers" className="border-b border-white/5 bg-surface-elevated/20 py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
-        <div className="order-2 lg:order-1">
-          <div className="overflow-hidden rounded-3xl ring-1 ring-white/10">
-            <img src={home} alt="Supplier warehouse" className="h-full w-full object-cover" />
-          </div>
-        </div>
-        <div className="order-1 lg:order-2">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
-            For suppliers
-          </p>
-          <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            Distribute your catalog through hundreds of stores.
-          </h2>
-          <p className="mt-5 max-w-xl text-lg text-foreground/65">
-            Upload your products once. Drop Direct connects them to a network of
-            South African resellers who market and sell on your behalf.
-          </p>
-          <ul className="mt-8 space-y-5">
-            {features.map((f) => (
-              <li key={f.title} className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-yellow/10 text-brand-yellow">
-                  <f.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-base font-semibold">{f.title}</h3>
-                  <p className="mt-1 text-sm text-foreground/60">{f.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <Link
-            to="/auth"
-            className="mt-10 inline-flex h-12 items-center gap-2 rounded-xl bg-surface-elevated px-6 text-sm font-semibold text-foreground ring-1 ring-white/10 transition-colors hover:bg-surface-input"
-          >
             Apply as a supplier
             <ArrowRight className="h-4 w-4" />
           </Link>
@@ -430,127 +410,51 @@ function ForSuppliers() {
 
 function LunexBridge() {
   return (
-    <section className="border-b border-white/5 py-24">
+    <section id="partner" className="border-b border-white/5 py-24">
       <div className="mx-auto max-w-5xl px-6">
         <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-surface-elevated to-background p-10 sm:p-14">
-          <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
-            <div className="text-center lg:text-right">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-background px-3 py-1 text-xs font-medium text-foreground/70">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-yellow" />
+              Official partner
+            </span>
+            <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">
+              Powered by the <span className="text-brand-yellow">LunexWeb</span> store network.
+            </h2>
+            <p className="mt-5 text-base text-foreground/65">
+              LunexWeb builds and manages the online stores that resellers run. Drop
+              Direct's API is exclusively integrated with those stores — so your
+              products plug straight into a verified, fully-built storefront network.
+            </p>
+          </div>
+
+          <div className="mt-10 grid items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
+            <div className="rounded-2xl bg-background/60 p-6 text-center ring-1 ring-white/10">
               <p className="text-xs font-semibold uppercase tracking-widest text-foreground/50">
-                Storefront layer
+                Storefront partner
               </p>
-              <h3 className="mt-2 text-2xl font-bold">LunexWeb</h3>
+              <h3 className="mt-2 text-xl font-bold">LunexWeb</h3>
               <p className="mt-2 text-sm text-foreground/60">
-                Done-for-you online stores with payments, domain, and design.
+                Builds and runs the online stores resellers sell from.
               </p>
             </div>
             <div className="flex items-center justify-center">
-              <div className="hidden h-px w-16 bg-gradient-to-r from-transparent via-brand-yellow to-transparent lg:block" />
+              <div className="hidden h-px w-12 bg-gradient-to-r from-transparent via-brand-yellow to-transparent lg:block" />
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-yellow text-background">
                 <ArrowRight className="h-5 w-5" />
               </div>
-              <div className="hidden h-px w-16 bg-gradient-to-r from-brand-yellow via-brand-yellow to-transparent lg:block" />
+              <div className="hidden h-px w-12 bg-gradient-to-r from-brand-yellow via-brand-yellow to-transparent lg:block" />
             </div>
-            <div className="text-center lg:text-left">
+            <div className="rounded-2xl bg-background/60 p-6 text-center ring-1 ring-white/10">
               <p className="text-xs font-semibold uppercase tracking-widest text-foreground/50">
-                Supplier layer
+                Supplier layer (you)
               </p>
-              <h3 className="mt-2 text-2xl font-bold">Drop Direct</h3>
+              <h3 className="mt-2 text-xl font-bold">Drop Direct</h3>
               <p className="mt-2 text-sm text-foreground/60">
-                Verified suppliers fulfill orders from your store automatically.
+                Routes orders from those stores to your warehouse.
               </p>
             </div>
           </div>
-          <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-foreground/55">
-            Drop Direct's API is exclusively integrated with{" "}
-            <span className="font-semibold text-foreground">LunexWeb stores</span>,
-            giving resellers a complete plug-and-play commerce stack.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Pricing() {
-  const plans = [
-    {
-      name: "Starter",
-      price: "Free",
-      desc: "Browse the catalog and test the platform.",
-      features: ["Unlimited browsing", "Up to 10 active products", "5% transaction fee", "Email support"],
-      cta: "Start free",
-      highlight: false,
-    },
-    {
-      name: "Growth",
-      price: "R 299",
-      per: "/month",
-      desc: "For active resellers scaling their store.",
-      features: ["Unlimited products", "3% transaction fee", "Priority order routing", "Margin analytics", "Chat support"],
-      cta: "Start Growth",
-      highlight: true,
-    },
-    {
-      name: "Supplier",
-      price: "Custom",
-      desc: "List your catalog across the reseller network.",
-      features: ["Unlimited SKUs", "Reseller demand insights", "API + bulk upload", "Dedicated account manager"],
-      cta: "Talk to us",
-      highlight: false,
-    },
-  ];
-  return (
-    <section id="pricing" className="border-b border-white/5 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
-            Pricing
-          </p>
-          <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            Simple plans that scale with you.
-          </h2>
-        </div>
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {plans.map((p) => (
-            <div
-              key={p.name}
-              className={`relative flex flex-col rounded-2xl p-8 ring-1 ${
-                p.highlight
-                  ? "bg-surface-elevated ring-brand-yellow/40"
-                  : "bg-surface-elevated/40 ring-white/10"
-              }`}
-            >
-              {p.highlight && (
-                <span className="absolute -top-3 right-6 rounded-full bg-brand-yellow px-3 py-1 text-xs font-bold text-background">
-                  Most popular
-                </span>
-              )}
-              <h3 className="text-lg font-semibold">{p.name}</h3>
-              <p className="mt-1 text-sm text-foreground/60">{p.desc}</p>
-              <p className="mt-6 text-4xl font-bold">
-                {p.price}
-                {p.per && <span className="text-base font-medium text-foreground/50">{p.per}</span>}
-              </p>
-              <ul className="mt-6 flex-1 space-y-3">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-foreground/75">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-yellow" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/auth"
-                className={`mt-8 inline-flex h-11 items-center justify-center rounded-xl px-5 text-sm font-semibold transition-opacity ${
-                  p.highlight
-                    ? "bg-brand-yellow text-background hover:opacity-90"
-                    : "bg-foreground text-background hover:opacity-90"
-                }`}
-              >
-                {p.cta}
-              </Link>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -559,10 +463,26 @@ function Pricing() {
 
 function FAQ() {
   const faqs = [
-    { q: "Do I need to hold inventory?", a: "No. Suppliers store and ship products. You only handle marketing and customer experience." },
-    { q: "How do I get paid?", a: "Customers pay you on your store. Drop Direct settles the supplier's portion automatically and you keep the margin." },
-    { q: "Is this only for South Africa?", a: "Yes — suppliers and resellers are South Africa-based for fast local fulfillment (avg. 48 hours)." },
-    { q: "Can I use my existing store?", a: "Drop Direct's API integrates exclusively with LunexWeb stores. We'll set yours up if you don't have one." },
+    {
+      q: "Do I sell directly to customers?",
+      a: "No. Resellers list your products on their own LunexWeb stores and handle the customer. You only see the order to fulfill.",
+    },
+    {
+      q: "Who sets the retail price?",
+      a: "You set the wholesale price. Resellers add their own margin on top when listing in their store.",
+    },
+    {
+      q: "How do I get paid?",
+      a: "Drop Direct collects payment from the reseller's store, holds it until the order ships, then settles your wholesale share automatically.",
+    },
+    {
+      q: "Can resellers integrate without LunexWeb?",
+      a: "Drop Direct's API is exclusively integrated with LunexWeb stores. This keeps the network verified and the experience consistent for suppliers.",
+    },
+    {
+      q: "What does it cost to list?",
+      a: "Listing is free. Drop Direct only takes a small percentage on successfully fulfilled orders.",
+    },
   ];
   return (
     <section className="border-b border-white/5 py-24">
@@ -595,18 +515,18 @@ function CTA() {
       />
       <div className="relative mx-auto max-w-3xl px-6 text-center">
         <h2 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-          Your store. Their inventory.
+          Your catalog. Their storefronts.
           <br />
-          <span className="text-brand-yellow">Your margin.</span>
+          <span className="text-brand-yellow">One distribution layer.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-foreground/65">
-          Join thousands of South African resellers building real businesses on Drop Direct.
+          Join the suppliers powering South Africa's fastest-growing reseller network.
         </p>
         <Link
           to="/auth"
           className="mt-9 inline-flex h-12 items-center gap-2 rounded-xl bg-brand-yellow px-6 text-sm font-semibold text-background transition-opacity hover:opacity-90"
         >
-          Get started — it's free
+          Apply as a supplier
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
@@ -620,7 +540,7 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 sm:flex-row">
         <Logo />
         <p className="text-xs text-foreground/40">
-          © {new Date().getFullYear()} Drop Direct. Powered by LunexWeb.
+          © {new Date().getFullYear()} Drop Direct. Official partner of LunexWeb.
         </p>
         <div className="flex gap-6 text-xs text-foreground/50">
           <a href="#" className="hover:text-foreground">Privacy</a>
