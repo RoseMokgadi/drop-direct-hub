@@ -142,6 +142,14 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+.light-theme {
+  --background: oklch(0.985 0.003 280);
+  --foreground: oklch(0.18 0.015 280);
+  --surface-elevated: oklch(0.94 0.005 280);
+  --surface-input: oklch(0.90 0.005 280);
+  --gradient-radial-glow: radial-gradient(circle at 50% 0%, oklch(0.92 0.19 105 / 0.10), transparent 60%);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
